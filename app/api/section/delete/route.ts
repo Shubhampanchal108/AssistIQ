@@ -1,9 +1,9 @@
 import { connectDB } from "@/Database/connection";
 import { sectionModel } from "@/Database/models/sectionModel";
 import { isAuthorized } from "@/lib/isAuthorized";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(req: NextResponse) {
+export async function DELETE(req: NextRequest) {
   await connectDB()
   try {
     const user = await isAuthorized();

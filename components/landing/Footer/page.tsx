@@ -11,11 +11,11 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="md:col-span-2 space-y-6">
             <Link href="/" className="flex items-center gap-3 group w-fit">
-              <div className="w-8 h-8 bg-linear-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.3)] group-hover:shadow-[0_0_25px_rgba(99,102,241,0.5)] transition-all duration-500">
-                <div className="w-3 h-3 bg-zinc-950 rounded-sm group-hover:rotate-45 transition-transform duration-500"></div>
+              <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.3)] group-hover:scale-105 transition-all duration-500">
+                <img src="/logo.jpeg" alt="Assist IQ" className="w-full h-full object-cover" />
               </div>
               <span className="text-xl font-bold tracking-tight text-white">
-                OneMinute Support
+                Assist IQ
               </span>
             </Link>
             <p className="text-zinc-400 text-sm max-w-xs leading-relaxed">
@@ -46,7 +46,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-4 border-t border-white/5 flex flex-col md:row justify-between items-center gap-2 text-xs text-zinc-500">
-          <p>© {currentYear} OneMinute Support. Built for engineers.</p>
+          <p>© {currentYear} Assist IQ. Built for modern businesses.</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>

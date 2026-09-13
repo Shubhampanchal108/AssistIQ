@@ -1,13 +1,14 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 
-// Initialize with your API Key
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-const MODEL_NAME = "gemini-3-flash-preview";
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
+const MODEL_NAME = "qwen/qwen3.6-27b";
+
+function stripThinkTags(text: string): string {
+  return text.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
+}
 
 export async function sumarizedMarkdown(markdown: string) {
   try {
-    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-
     const prompt = `
       You are a data summarization engine for an AI chatbot.
       Convert the input website markdown, text, or CSV data into a CLEAN, DENSE SUMMARY for LLM context usage.
@@ -25,16 +26,14 @@ export async function sumarizedMarkdown(markdown: string) {
       ${markdown}
     `;
 
-    const result = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: {
-        temperature: 0.1,
-        maxOutputTokens: 900,
-      },
+    const completion = await groq.chat.completions.create({
+      messages: [{ role: "user", content: prompt }],
+      model: MODEL_NAME,
+      temperature: 0.1,
+      max_tokens: 900,
     });
 
-    const response = await result.response;
-    return response.text().trim();
+    return stripThinkTags(completion.choices[0]?.message?.content?.trim() || "");
   } catch (error) {
     console.error("Error in summarizeMarkdown:", error);
     throw error;
@@ -43,8 +42,6 @@ export async function sumarizedMarkdown(markdown: string) {
 
 export async function summarizeConversation(messages: any[]) {
   try {
-    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-    
     const conversationText = messages
       .map((msg) => `${msg.role}: ${msg.content}`)
       .join("\n");
@@ -57,16 +54,14 @@ export async function summarizeConversation(messages: any[]) {
       ${conversationText}
     `;
 
-    const result = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: {
-        temperature: 0.1,
-        maxOutputTokens: 500,
-      },
+    const completion = await groq.chat.completions.create({
+      messages: [{ role: "user", content: prompt }],
+      model: MODEL_NAME,
+      temperature: 0.1,
+      max_tokens: 500,
     });
 
-    const response = await result.response;
-    return response.text().trim();
+    return stripThinkTags(completion.choices[0]?.message?.content?.trim() || "");
   } catch (error) {
     console.error("Error in summarizeConversation:", error);
     throw error;

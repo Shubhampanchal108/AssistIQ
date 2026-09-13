@@ -12,16 +12,19 @@ export async function GET(){
             return NextResponse.json({error: "Unauthorized"}, {status: 401})
         }
 
-        const existingMetadata = await chatBot.find({user_email: user.email});
+        let existingMetadata = await chatBot.findOne({ user_email: user.email });
 
-        if(!existingMetadata){
-            const newMetaData = await chatBot.create({user_email: user.email});
-
-            return NextResponse.json(newMetaData, {status: 200});
+        if (!existingMetadata) {
+            existingMetadata = await chatBot.create({
+                user_email: user.email,
+                color: "#4f46e5",
+                welcome_message: "Hi! How can I help you today?"
+            });
         }
 
-        return NextResponse.json(existingMetadata, {status: 200});
-    }catch(e){
-        return NextResponse.json({error: "Internal server error"}, {status: 500});
+        return NextResponse.json(existingMetadata, { status: 200 });
+    } catch (e) {
+        console.error("Error fetching chatbot metadata:", e);
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }

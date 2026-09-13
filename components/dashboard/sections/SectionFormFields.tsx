@@ -12,20 +12,6 @@ import {
 import { X, BookOpen, MessageSquare, ShieldCheck, Zap } from "lucide-react";
 
 
-interface SectionFormData {
-  name: string;
-  description: string;
-  tone: Tone;
-  allowedTopics: string;
-  blockedTopics: string;
-}
-
-interface KnowledgeSource {
-  _id: string; // Fixed from id to _id based on your map logic
-  type: string;
-  name: string;
-}
-
 interface SectionFormFieldProps {
   formData: SectionFormData;
   setFormData: (data: SectionFormData) => void;
@@ -111,16 +97,19 @@ const SectionFormFields = ({
           </SelectTrigger>
           <SelectContent className="bg-zinc-900 border-white/10 text-zinc-300">
             {knowledgeSources.length > 0 ? (
-              knowledgeSources.map((source) => (
-                <SelectItem key={source._id} value={source._id} className="focus:bg-indigo-500/20 focus:text-white">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-zinc-400 font-mono uppercase">
-                      {source.type}
-                    </span>
-                    <span>{source.name}</span>
-                  </div>
-                </SelectItem>
-              ))
+              knowledgeSources.map((source) => {
+                const sourceKey = source._id || source.id;
+                return (
+                  <SelectItem key={sourceKey} value={sourceKey} className="focus:bg-indigo-500/20 focus:text-white">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-zinc-400 font-mono uppercase">
+                        {source.type}
+                      </span>
+                      <span>{source.name}</span>
+                    </div>
+                  </SelectItem>
+                );
+              })
             ) : (
               <SelectItem value="none" disabled>No sources available</SelectItem>
             )}
@@ -130,11 +119,11 @@ const SectionFormFields = ({
         {/* Selected Sources Tags */}
         <div className="flex flex-wrap gap-2">
           {selectedSources.map((sourceId) => {
-            const source = knowledgeSources.find((s) => s._id === sourceId);
+            const source = knowledgeSources.find((s) => s._id === sourceId || s.id === sourceId);
             if (!source) return null;
             return (
               <div
-                key={source._id}
+                key={source._id || source.id}
                 className="flex items-center gap-2 bg-indigo-500/5 border border-indigo-500/20 pl-2 pr-1 py-1 rounded-md group"
               >
                 <span className="text-xs text-indigo-300 font-medium">{source.name}</span>

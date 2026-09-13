@@ -9,9 +9,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "OneMinute Support - Human-friendly AI",
+  title: "Assist IQ - Human-friendly AI Customer Support",
   description:
     "Instantly resolve customer questions with an assistant that reads your docs and speaks with empathy.",
+  icons: {
+    icon: "/logo.jpeg",
+  },
 };
 
 export default function RootLayout({

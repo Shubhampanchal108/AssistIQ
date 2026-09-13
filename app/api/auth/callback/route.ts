@@ -48,12 +48,12 @@ export async function GET(req: NextRequest) {
     }
 
     // ✅ Validate token
-    const claims = await scalekit.validateToken(idToken);
+    const claims = (await scalekit.validateToken(idToken)) as Record<string, any>;
 
     const organizationId =
-      claims.organizationId ||
-      claims.org_id ||
-      claims.oid ||
+      claims?.organizationId ||
+      claims?.org_id ||
+      claims?.oid ||
       null;
 
     if (!organizationId) {

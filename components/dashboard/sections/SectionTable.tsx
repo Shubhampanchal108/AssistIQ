@@ -3,16 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ShieldAlert, Loader2, Eye } from "lucide-react";
 
-interface Section {
-    id: string;
-    name: string;
-    sourceCount: number;
-    tone: Tone;
-    scopeLabel: string;
-    status: SectionStatus;
-}
-
-
 interface SectionTableProps {
     section: Section[];
     isLoading: boolean;

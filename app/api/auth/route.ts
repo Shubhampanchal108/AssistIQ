@@ -16,7 +16,10 @@ export async function GET(){
 
         })
 
-        const redirectUri = process.env.SCALEKIT_REDIRECT_URI 
+        const redirectUri = process.env.SCALEKIT_REDIRECT_URI;
+        if (!redirectUri) {
+          throw new Error("SCALEKIT_REDIRECT_URI is not defined");
+        }
 
         const options = {
             scopes: ["openId", "profile", "email", "offline_access"],

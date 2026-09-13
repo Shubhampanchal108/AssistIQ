@@ -205,7 +205,7 @@ const KnowledgeTable = ({
                       {getStatusBadge(source.status as SourceStatus)}
                     </TableCell>
                     <TableCell className="text-zinc-400 text-sm">
-                      {new Date(source.updatedAt).toLocaleDateString("en-US", {
+                      {new Date(source.updatedAt || source.last_updated || Date.now()).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
                         year: "numeric",

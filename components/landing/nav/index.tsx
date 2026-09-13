@@ -9,11 +9,11 @@ const Navbar = async () => {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-6 h-6 bg-linear-to-br from-indigo-500 to-purple-600 rounded-md flex items-center justify-center shadow-[0_0_12px_rgba(99,102,241,0.4)] group-hover:scale-105 transition-all duration-300">
-            <div className="w-2.5 h-2.5 bg-[#050509] rounded-sm group-hover:rotate-45 transition-transform duration-300"></div>
+          <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shadow-[0_0_12px_rgba(99,102,241,0.4)] group-hover:scale-105 transition-all duration-300">
+            <img src="/logo.jpeg" alt="Assist IQ" className="w-full h-full object-cover" />
           </div>
           <span className="text-base font-semibold tracking-tight text-zinc-100 group-hover:text-white transition-colors">
-            OneMinute Support
+            Assist IQ
           </span>
         </Link>
 

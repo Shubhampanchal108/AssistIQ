@@ -15,6 +15,22 @@ const metadataSchema = new mongoose.Schema({
     },
     external_links:{
         type: String,
+    },
+    support_email:{
+        type: String,
+        default: ""
+    },
+    timezone:{
+        type: String,
+        default: "UTC"
+    },
+    allowed_domains:{
+        type: String,
+        default: "*"
+    },
+    api_key:{
+        type: String,
+        default: ""
     }
 }, {timestamps: true})
 

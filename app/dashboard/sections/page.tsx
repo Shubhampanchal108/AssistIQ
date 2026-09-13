@@ -14,14 +14,6 @@ import {
 import { Plus } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-interface KnowledgeSource {
-  id: string;
-  user_email: string;
-  type: string;
-  name: string;
-  status: string;
-}
-
 const INITIAL_FORM_DATA: SectionFormData = {
   name: "",
   description: "",
@@ -190,7 +182,7 @@ const Sections = () => {
     setSelectedSection(section);
     setFormData({
       name: section.name,
-      description: section.description,
+      description: section.description || "",
       tone: section.tone,
       allowedTopics: section.allowed_topics || "",
       blockedTopics: section.blocked_topics || "",

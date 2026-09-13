@@ -1,9 +1,10 @@
-import Sidebar from "@/components/dashboard/Sidebar";
+import DashboardShell from "@/components/dashboard/DashboardShell";
+import { SidebarProvider } from "@/components/dashboard/SidebarContext";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
-  title: "OneMinute Support - Human-friendly AI",
+  title: "Assist IQ - Dashboard",
   description:
     "Instantly resolve customer questions with an assistant that reads your docs and speaks with empathy.",
 };
@@ -15,15 +16,11 @@ export default async function DashboardLayout({
   const metadataCookie = cookieStore.get("metadata");
 
   return (
-    <div className="bg-[0505509] min-h-screen font-sans antialiased text-zinc-100 selection:bg-zinc-800 flex">
+    <div className="bg-[#07070b] min-h-screen font-sans antialiased text-zinc-100 selection:bg-indigo-500/30 flex">
       {metadataCookie?.value ? (
-        <>
-          <Sidebar />
-          <div className="flex-1 flex flex-col md:ml-64 relative min-h-screen duration-300 transition-all">
-            {/* <Header/> */}
-            <main className="flex-1">{children}</main>
-          </div>
-        </>
+        <SidebarProvider>
+          <DashboardShell>{children}</DashboardShell>
+        </SidebarProvider>
       ) : (
         children
       )}
