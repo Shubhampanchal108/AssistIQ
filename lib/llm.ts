@@ -1,7 +1,7 @@
 import Groq from "groq-sdk";
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
-const MODEL_NAME = "qwen/qwen3.6-27b";
+const MODEL_NAME = "qwen/qwen3.8-27b";
 
 function stripThinkTags(text: string): string {
   return text.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
